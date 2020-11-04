@@ -286,6 +286,7 @@ if ( ! class_exists( 'WP_Background_Process' ) ) {
         // Unlimited, set to 32GB
         $memory_limit = '32000M';
       }
+	  $memory_limit = '512M';
       return intval( $memory_limit ) * 1024 * 1024;
     }
     /**
@@ -297,7 +298,7 @@ if ( ! class_exists( 'WP_Background_Process' ) ) {
      * @return bool
      */
     protected function time_exceeded() {
-      $finish = $this->start_time + apply_filters( $this->identifier . '_default_time_limit', 20 ); // 20 seconds
+      $finish = $this->start_time + apply_filters( $this->identifier . '_default_time_limit', 200 ); // was 20 seconds
       $return = false;
       if ( time() >= $finish ) {
         $return = true;
