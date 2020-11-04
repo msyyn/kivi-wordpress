@@ -144,7 +144,7 @@ class Kivi_Background_Process extends WP_Background_Process
 		$posts = $wpdb->get_results(
 			$wpdb->prepare("SELECT post_id FROM $wpdb->postmeta WHERE meta_key = 'original_image_url' AND  meta_value = '%s' LIMIT 1", $image_url)
 		, ARRAY_A);
-
+		$wpdb->flush();
         if ( is_array($posts) && empty($posts) ) { // empty array: image not in WP, save it
             $this->kivi_save_image($image_url, $image_type, $image_order, $post_id, $caption);
         }
