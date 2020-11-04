@@ -140,19 +140,11 @@ class Kivi_Background_Process extends WP_Background_Process
 		}
 		
         // add only if not already in WP ( search for original_image_url for current kivi_item )
-        $args = array(
-            'meta_query' => array(
-                array(
-                    'key' => 'original_image_url',
-                    'value' => $image_url,
-                )
-            ),
-			'post_parent' => $post_id,
-            'post_type' => 'attachment',
-            'post_status' => 'any',
-			'cache_results'  => false,
-        );
-        $posts = get_posts($args);
+		global $wpdb;
+		$posts = $wpdb->get_results(
+			$wpdb->prepare("SELECT post_id FROM $wpdb->postmeta WHERE meta_key = 'original_image_url' AND  meta_value = '%s' LIMIT 1", $image_url)
+		, ARRAY_A);
+
         if ( is_array($posts) && empty($posts) ) { // empty array: image not in WP, save it
             $this->kivi_save_image($image_url, $image_type, $image_order, $post_id, $caption);
         }
