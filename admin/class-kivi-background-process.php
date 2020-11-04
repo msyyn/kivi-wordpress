@@ -102,7 +102,7 @@ class Kivi_Background_Process extends WP_Background_Process
             ),
             'post_type' => 'kivi_item',
             'post_status' => get_post_stati(),
-			'cache_results'  => false,
+			'fields' => 'ids',
         );
 
         $count = count(get_posts($args));
@@ -150,8 +150,9 @@ class Kivi_Background_Process extends WP_Background_Process
 			'post_parent' => $post_id,
             'post_type' => 'attachment',
             'post_status' => 'any',
-			'cache_results'  => false,
+			'fields' => 'ids',
         );
+		wp_cache_flush();
         $posts = get_posts($args);
         if ( is_array($posts) && empty($posts) ) { // empty array: image not in WP, save it
             $this->kivi_save_image($image_url, $image_type, $image_order, $post_id, $caption);
