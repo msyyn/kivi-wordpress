@@ -298,7 +298,7 @@ if ( ! class_exists( 'WP_Background_Process' ) ) {
      * @return bool
      */
     protected function time_exceeded() {
-      $finish = $this->start_time + apply_filters( $this->identifier . '_default_time_limit', 200 ); // was 20 seconds
+      $finish = $this->start_time + apply_filters( $this->identifier . '_default_time_limit', 10 ); // was 20 seconds
       $return = false;
       if ( time() >= $finish ) {
         $return = true;
