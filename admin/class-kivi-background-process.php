@@ -259,6 +259,11 @@ class Kivi_Background_Process extends WP_Background_Process
                                 set_post_thumbnail($post_id, $posty->ID);
                             }
                         }
+						elseif(isset($posts[1])){ // dublicate
+							$posty = $posts[1];
+							error_log("Dublicate image found on update ".$posty->ID);
+							//wp_delete_attachment($posty->ID, $force_delete = true);
+						}
 
                     }
                 }
