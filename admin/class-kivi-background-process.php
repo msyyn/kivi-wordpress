@@ -417,9 +417,6 @@ class Kivi_Background_Process extends WP_Background_Process
                     set_post_thumbnail($post_id, $attachment_id);
                 }
 
-                require_once(ABSPATH . 'wp-admin/includes/image.php');
-                $attachment_data = wp_generate_attachment_metadata($attachment_id, $upload_file['file']);
-				wp_update_attachment_metadata($attachment_id, $attachment_data);
                 if ($image_type == 'iv_person_image_url') {
                     update_post_meta($post_id, '_kivi_iv_person_image', $attachment_id);
                 } else {
@@ -429,8 +426,12 @@ class Kivi_Background_Process extends WP_Background_Process
                 if ($image_type != 'iv_person_image_url') {
                     update_post_meta($attachment_id, 'image_order', $image_order);
                 }
-
-                return wp_get_attachment_url($attachment_id);
+				
+				require_once(ABSPATH . 'wp-admin/includes/image.php');
+                $attachment_data = wp_generate_attachment_metadata($attachment_id, $upload_file['file']);
+				wp_update_attachment_metadata($attachment_id, $attachment_data);
+                
+				return wp_get_attachment_url($attachment_id);
             }
         }
     }
