@@ -21,7 +21,7 @@ class Kivi_Deactivator {
 	 * @since    1.0.0
 	 */
 	public static function deactivate() {
-
+		wp_clear_scheduled_hook('kivi_items_sync');
 	}
 
 }
