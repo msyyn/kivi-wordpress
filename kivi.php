@@ -24,16 +24,6 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-
-/* Schedule for kivi background jobs */
-function kivi_add_schedule( $schedules ) {
-	$schedules['every15minutes'] = array(
-		'interval' => 900,
-		'display' => __('Every 15 minutes')
-	);
-	return $schedules;
-}
-
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-kivi-activator.php

@@ -322,7 +322,7 @@ if ( ! class_exists( 'WP_Background_Process' ) ) {
      * @return mixed
      */
     public function schedule_cron_healthcheck( $schedules ) {
-      $interval = apply_filters( $this->identifier . '_cron_interval', 5 );
+      $interval = apply_filters( $this->identifier . '_cron_interval', 10 );
       if ( property_exists( $this, 'cron_interval' ) ) {
         $interval = apply_filters( $this->identifier . '_cron_interval', $this->cron_interval_identifier );
       }

@@ -493,11 +493,11 @@ public function kivi_sync() {
 
   /*
   * Start the scheduler that runs the background process ie. checks
-  * the new xml and does it's stuff every 30 minutes.
+  * the new xml and does it's stuff every hour.
   */
   public function start_scheduler() {
     if (! wp_next_scheduled ( 'kivi_items_sync' )) {
-      wp_schedule_event(time(), 'every15minutes', 'kivi_items_sync');
+      wp_schedule_event(time(), 'hourly', 'kivi_items_sync');
     }
   }
 
